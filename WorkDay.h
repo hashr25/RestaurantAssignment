@@ -19,8 +19,10 @@ public:
     MyTime getScheduledEndTime();
     MyTime getClockInTime();
     MyTime getClockOutTime();
+
     float getHoursScheduled();
     float getHoursWorked();
+
 
     void setDate( MyDate );
     void setScheduledStartTime( int, int, int );

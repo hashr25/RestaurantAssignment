@@ -144,7 +144,10 @@ float WorkDay::calculateHoursScheduled()
     //std::cout << "hours: " << float(timeDifference.getHour()) << std::endl;
     //std::cout << ( float(timeDifference.getHour() )) << std::endl;
 
+<<<<<<< HEAD
     hoursScheduled = hoursScheduledCalculation;
+=======
+>>>>>>> origin/master
     return hoursScheduledCalculation;
 }
 
@@ -221,4 +224,6 @@ WorkDay WorkDay::operator = ( const WorkDay& newWorkDay )
 
     hoursScheduled = newWorkDay.hoursScheduled;
     hoursWorked = newWorkDay.hoursWorked;
+
+    return *this;
 }
