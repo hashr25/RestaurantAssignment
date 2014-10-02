@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Combo.cpp" />
+		<Unit filename="Combo.h" />
 		<Unit filename="Food.cpp" />
 		<Unit filename="Food.h" />
 		<Unit filename="Ingredient.cpp" />
