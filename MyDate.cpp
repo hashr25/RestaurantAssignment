@@ -298,3 +298,12 @@ void MyDate::previousDay()
 
     setDay( newDay );
 }
+
+MyDate MyDate::operator = ( const MyDate& newDate )
+{
+    year = newDate.year;
+    month = newDate.month;
+    day = newDate.day;
+
+    return *this;
+}

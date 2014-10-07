@@ -252,3 +252,12 @@ MyTime MyTime::getCurrentTime()
 
     return currentTime;
 }
+
+MyTime MyTime::operator = ( const MyTime& newTime )
+{
+    hour = newTime.hour;
+    minute = newTime.minute;
+    second = newTime.second;
+
+    return *this;
+}

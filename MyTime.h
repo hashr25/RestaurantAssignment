@@ -34,6 +34,8 @@ public:
     MyTime previousHour();
     MyTime getCurrentTime();
 
+    MyTime operator = ( const MyTime& );
+
 private:
     ///Private Data
     int hour;

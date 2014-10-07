@@ -102,3 +102,13 @@ void Ingredient::printIngredient()
     std::cout << "Cost per Unit:  $" << costPerUnit << std::endl;
     std::cout << "Cost of Stock:  $" << getCostOfStock() << "\n" << std::endl;
 }
+
+Ingredient Ingredient::operator = ( const Ingredient& newIngredient )
+{
+    name = newIngredient.name;
+    quantity = newIngredient.quantity;
+    costPerUnit = newIngredient.costPerUnit;
+    unitOfMeasurement = newIngredient.unitOfMeasurement;
+
+    return *this;
+}

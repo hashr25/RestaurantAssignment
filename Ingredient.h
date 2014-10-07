@@ -29,6 +29,8 @@ public:
     void removeUnits( int );
     void printIngredient();
 
+    Ingredient operator = ( const Ingredient& );
+
 private:
     std::string name;
     int quantity;

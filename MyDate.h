@@ -34,6 +34,8 @@ public:
     void previousMonth();
     void previousYear();
 
+    MyDate operator = ( const MyDate& );
+
 private:
 
 
