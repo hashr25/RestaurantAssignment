@@ -131,7 +131,8 @@ Schedule Schedule::operator = ( const Schedule& newSchedule )
 {
     for( int i = 0; i < 7; i++ )
     {
-        workWeekOne[i] = newSchedule.workWeekOne[i];
-        workWeekTwo[i] = newSchedule.workWeekTwo[i];
+        setWorkDay( newSchedule.workWeekOne[i], 0, i) ;
+        setWorkDay( newSchedule.workWeekTwo[i], 1, i);
     }
+    return *this;
 }
