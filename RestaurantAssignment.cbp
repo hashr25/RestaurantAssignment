@@ -31,12 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Check.cpp" />
+		<Unit filename="Check.h" />
 		<Unit filename="Combo.cpp" />
 		<Unit filename="Combo.h" />
+		<Unit filename="Employee.cpp" />
+		<Unit filename="Employee.h" />
 		<Unit filename="Food.cpp" />
 		<Unit filename="Food.h" />
 		<Unit filename="Ingredient.cpp" />
 		<Unit filename="Ingredient.h" />
+		<Unit filename="Inventory.cpp" />
+		<Unit filename="Inventory.h" />
 		<Unit filename="MyDate.cpp" />
 		<Unit filename="MyDate.h" />
 		<Unit filename="MyTime.cpp" />
