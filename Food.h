@@ -25,6 +25,8 @@ public:
 
 	///Member Methods
 	void setCost();
+	bool ingredientInFood(Ingredient);
+	int searchForIngredient(Ingredient);
 	void addIngredient(const Ingredient&);
 	void removeIngredient(const Ingredient&);
 

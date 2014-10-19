@@ -3,6 +3,13 @@
 ///Constructors and Destructors
 Schedule::Schedule()
 {
+    WorkDay blankDay;
+
+    for( int i = 0; i < 7; i++ )
+    {
+        workWeekOne.push_back( blankDay );
+        workWeekTwo.push_back( blankDay );
+    }
     //Nothing really to allocate
 }
 
@@ -13,12 +20,12 @@ Schedule::~Schedule()
 
 
 ///Getters
-WorkDay* Schedule::getWorkWeekOne()
+std::vector<WorkDay> Schedule::getWorkWeekOne()
 {
     return workWeekOne;
 }
 
-WorkDay* Schedule::getWorkWeekTwo()
+std::vector<WorkDay> Schedule::getWorkWeekTwo()
 {
     return workWeekTwo;
 }
@@ -27,9 +34,9 @@ float Schedule::getWeekOneScheduledHours()
 {
     float hoursScheduled = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekOne.size(); i++ )
     {
-        hoursScheduled += workWeekOne[i].calculateHoursScheduled();
+        hoursScheduled += workWeekOne.at(i).calculateHoursScheduled();
     }
 
     return hoursScheduled;
@@ -39,9 +46,9 @@ float Schedule::getWeekTwoScheduledHours()
 {
     float hoursScheduled = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekTwo.size(); i++ )
     {
-        hoursScheduled += workWeekTwo[i].calculateHoursScheduled();
+        hoursScheduled += workWeekTwo.at(i).calculateHoursScheduled();
     }
 
     return hoursScheduled;
@@ -51,10 +58,10 @@ float Schedule::getTotalScheduledHours()
 {
     float hoursScheduled = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekOne.size(); i++ )
     {
-        hoursScheduled += workWeekOne[i].calculateHoursScheduled();
-        hoursScheduled += workWeekTwo[i].calculateHoursScheduled();
+        hoursScheduled += workWeekOne.at(i).calculateHoursScheduled();
+        hoursScheduled += workWeekTwo.at(i).calculateHoursScheduled();
     }
 
     return hoursScheduled;
@@ -64,9 +71,9 @@ float Schedule::getWeekOneWorkedHours()
 {
     float hoursWorked = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekOne.size(); i++ )
     {
-        hoursWorked += workWeekOne[i].calculateHoursWorked();
+        hoursWorked += workWeekOne.at(i).calculateHoursWorked();
     }
 
     return hoursWorked;
@@ -76,9 +83,9 @@ float Schedule::getWeekTwoWorkedHours()
 {
     float hoursWorked = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekTwo.size(); i++ )
     {
-        hoursWorked += workWeekTwo[i].calculateHoursWorked();
+        hoursWorked += workWeekTwo.at(i).calculateHoursWorked();
     }
 
     return hoursWorked;
@@ -88,10 +95,10 @@ float Schedule::getTotalWorkedHours()
 {
     float hoursWorked = 0.0;
 
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekOne.size(); i++ )
     {
-        hoursWorked += workWeekOne[i].calculateHoursWorked();
-        hoursWorked += workWeekTwo[i].calculateHoursWorked();
+        hoursWorked += workWeekOne.at(i).calculateHoursWorked();
+        hoursWorked += workWeekTwo.at(i).calculateHoursWorked();
     }
 
     return hoursWorked;
@@ -101,38 +108,38 @@ void Schedule::setWorkDay( WorkDay workDayToSet, int weekToSet, int dayToSet )
 {
     if( weekToSet == 0 )
     {
-        workWeekOne[ dayToSet ].setDate( workDayToSet.getDate() );
-        workWeekOne[ dayToSet ].setScheduledStartTime( workDayToSet.getScheduledStartTime().getHour(),
+        workWeekOne.at( dayToSet ).setDate( workDayToSet.getDate() );
+        workWeekOne.at( dayToSet ).setScheduledStartTime( workDayToSet.getScheduledStartTime().getHour(),
                                                          workDayToSet.getScheduledStartTime().getMinute(),
                                                          workDayToSet.getScheduledStartTime().getSecond() );
-        workWeekOne[ dayToSet ].setScheduledEndTime( workDayToSet.getScheduledEndTime().getHour(),
+        workWeekOne.at( dayToSet ).setScheduledEndTime( workDayToSet.getScheduledEndTime().getHour(),
                                                        workDayToSet.getScheduledEndTime().getMinute(),
                                                        workDayToSet.getScheduledEndTime().getSecond() );
-        workWeekOne[ dayToSet ].setClockInTime( workDayToSet.getClockInTime() );
-        workWeekOne[ dayToSet ].setClockOutTime( workDayToSet.getClockOutTime() );
+        workWeekOne.at( dayToSet ).setClockInTime( workDayToSet.getClockInTime() );
+        workWeekOne.at( dayToSet ).setClockOutTime( workDayToSet.getClockOutTime() );
     }
 
     else if( weekToSet == 1 )
     {
-        workWeekTwo[ dayToSet ].setDate( workDayToSet.getDate() );
-        workWeekTwo[ dayToSet ].setScheduledStartTime( workDayToSet.getScheduledStartTime().getHour(),
+        workWeekTwo.at( dayToSet ).setDate( workDayToSet.getDate() );
+        workWeekTwo.at( dayToSet ).setScheduledStartTime( workDayToSet.getScheduledStartTime().getHour(),
                                                          workDayToSet.getScheduledStartTime().getMinute(),
                                                          workDayToSet.getScheduledStartTime().getSecond() );
-        workWeekTwo[ dayToSet ].setScheduledEndTime( workDayToSet.getScheduledEndTime().getHour(),
+        workWeekTwo.at( dayToSet ).setScheduledEndTime( workDayToSet.getScheduledEndTime().getHour(),
                                                        workDayToSet.getScheduledEndTime().getMinute(),
                                                        workDayToSet.getScheduledEndTime().getSecond() );
-        workWeekTwo[ dayToSet ].setClockInTime( workDayToSet.getClockInTime() );
-        workWeekTwo[ dayToSet ].setClockOutTime( workDayToSet.getClockOutTime() );
+        workWeekTwo.at( dayToSet ).setClockInTime( workDayToSet.getClockInTime() );
+        workWeekTwo.at( dayToSet ).setClockOutTime( workDayToSet.getClockOutTime() );
     }
 
 }
 
 Schedule Schedule::operator = ( const Schedule& newSchedule )
 {
-    for( int i = 0; i < 7; i++ )
+    for( int i = 0; i < workWeekOne.size(); i++ )
     {
-        setWorkDay( newSchedule.workWeekOne[i], 0, i) ;
-        setWorkDay( newSchedule.workWeekTwo[i], 1, i);
+        setWorkDay( newSchedule.workWeekOne.at(i), 0, i) ;
+        setWorkDay( newSchedule.workWeekTwo.at(i), 1, i);
     }
     return *this;
 }

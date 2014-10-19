@@ -2,8 +2,6 @@
 // Group
 #include "Inventory.h"
 
-using namespace std;
-
 Inventory::Inventory()
 {
 
@@ -28,7 +26,7 @@ int Inventory::searchForIngredient(Ingredient ingredientToFind)
 
     int tempCounter = 0;
     int indexOfVectorIngredient = 0;
-    string tempNameHolder;
+    std::string tempNameHolder;
 
     for( tempCounter = 0; tempCounter < ingredientsInStock.size(); tempCounter++ )
     {
@@ -124,7 +122,7 @@ bool Inventory::ifInStock(Ingredient ingredientToFind)
 
     bool ingredientWasFound = false;
     int tempCounter = 0;
-    string tempNameHolder;
+    std::string tempNameHolder;
 
     for( tempCounter = 0; tempCounter < ingredientsInStock.size(); tempCounter++ )
     {
@@ -148,3 +146,8 @@ Inventory::~Inventory()
 {
 
 }// Inventory()::~Inventory()
+
+std::vector<Ingredient> Inventory::getInventory()
+{
+    return ingredientsInStock;
+}

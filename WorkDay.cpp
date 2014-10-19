@@ -3,7 +3,7 @@
 ///Constructors and Destructors
 WorkDay::WorkDay()
 {
-    std::cout << "Assigns the values" << std::endl;
+
 }
 
 WorkDay::~WorkDay()
@@ -144,10 +144,8 @@ float WorkDay::calculateHoursScheduled()
     //std::cout << "hours: " << float(timeDifference.getHour()) << std::endl;
     //std::cout << ( float(timeDifference.getHour() )) << std::endl;
 
-<<<<<<< HEAD
     hoursScheduled = hoursScheduledCalculation;
-=======
->>>>>>> origin/master
+
     return hoursScheduledCalculation;
 }
 

@@ -12,8 +12,8 @@ public:
     ~Schedule();
 
     ///Getters
-    WorkDay* getWorkWeekOne();
-    WorkDay* getWorkWeekTwo();
+    std::vector<WorkDay> getWorkWeekOne();
+    std::vector<WorkDay> getWorkWeekTwo();
     float getWeekOneScheduledHours();
     float getWeekTwoScheduledHours();
     float getTotalScheduledHours();
@@ -25,8 +25,8 @@ public:
     Schedule operator = ( const Schedule& );
 
 private:
-    WorkDay workWeekOne[7];
-    WorkDay workWeekTwo[7];
+    std::vector<WorkDay> workWeekOne;
+    std::vector<WorkDay> workWeekTwo;
 };
 
 #endif // SCHEDULE_H
