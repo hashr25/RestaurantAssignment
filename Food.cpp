@@ -11,6 +11,7 @@ Food::Food(std::string newName, int newSize, float newPrice, std::vector<Ingredi
     name(newName), size(newSize), price(newPrice), listOfIngredient(newListOfIngredient)
 {
 	///Variables set in init list.
+	setCost();
 }
 
 ///Getters and Setters
@@ -77,6 +78,36 @@ void Food::setCost()
 	}
 }
 
+bool Food::ingredientInFood( Ingredient ingredient )
+{
+    bool result = false;
+
+    for( int i = 0; i < listOfIngredient.size(); i++ )
+    {
+        if( ingredient.getName() == listOfIngredient.at(i).getName() )
+        {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+int Food::searchForIngredient( Ingredient ingredient )
+{
+    int ingredientIndex;
+
+    for( int i = 0; i < listOfIngredient.size(); i++ )
+    {
+        if( ingredient.getName() == listOfIngredient.at(i).getName() )
+        {
+            ingredientIndex = i;
+        }
+    }
+
+    return ingredientIndex;
+}
+
 void Food::addIngredient(const Ingredient& ingredient)
 {
 	listOfIngredient.push_back(ingredient);
@@ -84,9 +115,9 @@ void Food::addIngredient(const Ingredient& ingredient)
 
 void Food::removeIngredient(const Ingredient& ingredient)
 {
-	std::vector<Ingredient>::iterator result = std::find(listOfIngredient.begin(), listOfIngredient.end(), ingredient);
-	if (result != listOfIngredient.end())
+	if ( ingredientInFood( ingredient ) )
 	{
-		listOfIngredient.erase(result);
+	    int result = searchForIngredient( ingredient );
+		listOfIngredient.erase( listOfIngredient.begin()+result );
 	}
 }

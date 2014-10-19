@@ -8,6 +8,19 @@ Employee::Employee()
     setID();
 }
 
+Employee::Employee( std::string newName , int newPosition, std::string newPositionTitle, float newPayRate ):
+    name(newName), position(newPosition), positionTitle(newPositionTitle), hourlyPayRate(newPayRate)
+{
+    setID();
+}
+
+Employee::Employee( std::string newName , int newPosition, std::string newPositionTitle, float newPayRate, Schedule newSchedule ):
+    name(newName), position(newPosition), positionTitle(newPositionTitle),
+    hourlyPayRate(newPayRate), employeeSchedule(newSchedule)
+{
+    setID();
+}
+
 Employee::~Employee()
 {
 

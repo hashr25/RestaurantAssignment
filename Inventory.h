@@ -10,8 +10,6 @@
 #include <vector>
 #include "Ingredient.h"
 
-using namespace std;
-
 class Inventory
 {
 
@@ -26,9 +24,10 @@ public:
     void removeStock(Ingredient, int);// removes a certain amount of a specific amount of a certain stock.
     void ingredientQuanitityAdjustment(Ingredient, int);// changes the amount of a specific ingredient.
     bool ifInStock(Ingredient);// checks to make sure ingredient is in the inventory.
+    std::vector<Ingredient> getInventory();
 
 private:
-    vector <Ingredient> ingredientsInStock;
+    std::vector <Ingredient> ingredientsInStock;
 
 };
 

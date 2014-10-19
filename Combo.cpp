@@ -1,76 +1,120 @@
 #include "Combo.h"
 
+Combo::Combo():
+    price(0), cost(0), comboSize(0)
+{
 
-Combo::Combo(): m_price(0): m_cost(0): m_comboSize(0) { }
+}
 
-Combo::Combo(int price, int cost, int comboSize, vector<Food> listOfFoods):
-m_price(price): m_cost(cost) : m_listOfFoods(listOfFoods)
+Combo::Combo(std::string newName, float newPrice, int newComboSize, std::vector<Food> newListOfFoods):
+    name(newName), price(newPrice), listOfFoods(newListOfFoods)
  {
-    if (comboSize >= 0 &&
-        comboSize <= 3)
-        m_comboSize = comboSize;
-    else
-        m_comboSize = 0;
+    setComboSize( newComboSize );
+    setCost();
  }
 
-int Combo::getPrice()
+std::string Combo::getName()
 {
-    return m_price;
+    return name;
 }
 
-int Combo::getCost()
+float Combo::getPrice()
 {
-    return m_cost;
+    return price;
 }
 
-void Combo::setPrice(int price)
+float Combo::getCost()
+{
+    return cost;
+}
+
+void Combo::setName( std::string name )
+{
+    this -> name = name;
+}
+
+void Combo::setPrice(float price)
 {
     if (price < 0)
-        m_price = 0;
+    {
+        price = 0;
+    }
+
     else
-        m_price = price;
+    {
+        this -> price = price;
+    }
 }
 
-void Combo::setCost(int cost)
+void Combo::setCost( float cost )
 {
-    if (cost < 0)
-        m_cost = 0;
-    else
-        m_cost = cost;
+    this -> cost = cost;
+}
+
+void Combo::setCost()
+{
+    float costHolder = 0;
+
+    for( int i = 0; i < listOfFoods.size(); i++ )
+    {
+        costHolder = costHolder + listOfFoods.at(i).getCost();
+    }
+
+    cost = costHolder;
 }
 
 void Combo::setComboSize(int comboSize)
 {
     if (comboSize >= 0 && comboSize <= 3)
-        m_comboSize = comboSize;
+    {
+        comboSize = comboSize;
+    }
+
     else
-        m_comboSize = 0;
+    {
+        comboSize = 0;
+    }
 }
 
 void Combo::calculateCost()
 {
     float res = 0;
-    for (int i = 0; i < m_listOfFoods.size(); )
+    for (int i = 0; i < listOfFoods.size(); )
     {
-        res += m_listOfFoods[i].getCost();
+        res += listOfFoods[i].getCost();
     }
-    m_cost = res;
+    cost = res;
 }
 
 void Combo::calculatePrice()
 {
     float res = 0;
-    for (int i = 0; i < m_listOfFoods.size(); )
+    for (int i = 0; i < listOfFoods.size(); )
     {
-        res += m_listOfFoods[i].getPrice();
+        res += listOfFoods[i].getPrice();
     }
-    m_price = res;
+    price = res;
+}
+
+bool Combo::foodInCombo( Food food )
+{
+    bool result = false;
+
+    for( int i = 0; i < listOfFoods.size(); i++ )
+    {
+        if( food.getName() == listOfFoods.at(i).getName() )
+        {
+            result = true;
+        }
+    }
+
+    return result;
 }
 
 int Combo::searchForFood(Food food)
 {
-    string name = food.getName();
-    for (unsigned int i = 0; i < m_listOfFoods.size(); ++i)
+    std::string name = food.getName();
+    for (unsigned int i = 0; i < listOfFoods.size(); ++i)
 	{
 		if (listOfFoods[i].getName() == name)
 			return i;
@@ -80,14 +124,17 @@ int Combo::searchForFood(Food food)
 
 void Combo::addFood(Food food)
 {
-    m_listOfFoods.push_back(food);
+    listOfFoods.push_back(food);
 }
 
 void Combo::removeFood(Food food)
 {
-    int searchResult = searchForFood(food);
-    if (res > -1)
+    if( foodInCombo(food) )
     {
-        m_listOfFoods.erase(m_listOfFoods.begin() + searchResult);
+        int searchResult = searchForFood(food);
+        if (searchResult > -1)
+        {
+            listOfFoods.erase(listOfFoods.begin() + searchResult);
+        }
     }
 }

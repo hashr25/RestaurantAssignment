@@ -1,34 +1,36 @@
-#include "Food.h"
-
 #ifndef COMBO_H
 #define COMBO_H
 
-using namespace std;
+#include "Food.h"
 
 class Combo
 {
-    public:
-        Combo();
-        Combo(int, int, int, vector<Food>)
-        ~Combo();
+public:
+    Combo();
+    Combo(std::string, float, int, std::vector<Food>);
 
-        float getCost();
-        float getPrice();
-        int getComboSize();
-        void setCost(float cost);
-        void setPrice(float price);
-        void setComboSize(int comboSize);
-        void calculatePrice();
-        void calculateCost();
-        int searchForFood(Food food);
-        void addFood(Food food);
-        void removeFood(Food food);
-}
-    private:
-        vector<Food> m_listOfFoods;
-        int m_comboSize;
-        float m_price;
-        float m_cost;
+    std::string getName();
+    float getCost();
+    float getPrice();
+    int getComboSize();
+    void setName(std::string);
+    void setCost(float);
+    void setCost();
+    void setPrice(float);
+    void setComboSize(int);
+    void calculatePrice();
+    void calculateCost();
+    bool foodInCombo(Food);
+    int searchForFood(Food);
+    void addFood(Food);
+    void removeFood(Food);
+
+private:
+    std::vector<Food> listOfFoods;
+    std::string name;
+    int comboSize;
+    float price;
+    float cost;
 };
 
 #endif // COMBO_H

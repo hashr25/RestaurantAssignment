@@ -10,6 +10,8 @@ class Employee
 public:
     ///Constructors and Destructors
     Employee();
+    Employee( std::string, int, std::string, float );
+    Employee( std::string, int, std::string, float, Schedule );
     ~Employee();
 
     ///Getters and Setters

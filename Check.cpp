@@ -5,7 +5,7 @@
 
 Check::Check()
 {
-
+    setCheckNumber();
 }// Check::Check()
 
 int Check::checkNumberGenerator = 1000;
