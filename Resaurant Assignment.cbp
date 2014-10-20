@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Resaurant Assignment" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Resaurant Assignment" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Resaurant Assignment" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Check.cpp" />
+		<Unit filename="Check.h" />
+		<Unit filename="Combo.cpp" />
+		<Unit filename="Combo.h" />
+		<Unit filename="Employee.cpp" />
+		<Unit filename="Employee.h" />
+		<Unit filename="Food.cpp" />
+		<Unit filename="Food.h" />
+		<Unit filename="Includes.h" />
+		<Unit filename="Ingredient.cpp" />
+		<Unit filename="Ingredient.h" />
+		<Unit filename="Inventory.cpp" />
+		<Unit filename="Inventory.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
+		<Unit filename="MyDate.cpp" />
+		<Unit filename="MyDate.h" />
+		<Unit filename="MyTime.cpp" />
+		<Unit filename="MyTime.h" />
+		<Unit filename="Order.cpp" />
+		<Unit filename="Order.h" />
+		<Unit filename="PayRoll.cpp" />
+		<Unit filename="PayRoll.h" />
+		<Unit filename="Schedule.cpp" />
+		<Unit filename="Schedule.h" />
+		<Unit filename="Staff.cpp" />
+		<Unit filename="Staff.h" />
+		<Unit filename="Terminal.cpp" />
+		<Unit filename="Terminal.h" />
+		<Unit filename="TerminalClassTestMain.cpp" />
+		<Unit filename="WorkDay.cpp" />
+		<Unit filename="WorkDay.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

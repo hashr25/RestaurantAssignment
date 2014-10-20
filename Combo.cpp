@@ -28,6 +28,11 @@ float Combo::getCost()
     return cost;
 }
 
+std::vector<Food> Combo::getFoods()
+{
+    return listOfFoods;
+}
+
 void Combo::setName( std::string name )
 {
     this -> name = name;
@@ -44,11 +49,6 @@ void Combo::setPrice(float price)
     {
         this -> price = price;
     }
-}
-
-void Combo::setCost( float cost )
-{
-    this -> cost = cost;
 }
 
 void Combo::setCost()

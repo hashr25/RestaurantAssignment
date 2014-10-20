@@ -15,16 +15,16 @@ public:
 
 	///Getters and Setters
 	std::string getName();
-	int getSize();
+	int getFoodSize();
 	float getPrice();
+	float getCost();
 	std::vector<Ingredient> getIngredients();
 	void setName(std::string);
-	void setSize(int);
+	void setFoodSize(int);
 	void setPrice(float);
-	float getCost();
+	void setCost();
 
 	///Member Methods
-	void setCost();
 	bool ingredientInFood(Ingredient);
 	int searchForIngredient(Ingredient);
 	void addIngredient(const Ingredient&);
@@ -32,7 +32,7 @@ public:
 
 private:
 	std::string name;
-	int size;
+	int foodSize;
 	float price;
 	float cost;
 	std::vector<Ingredient> listOfIngredient;

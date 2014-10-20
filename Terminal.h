@@ -39,11 +39,19 @@ public:
     void displayFoods();
     void displayCombos();
     void takeOrder();
-    void addFoodToOrder( Order );
-    void addComboToOrder( Order );
+    void addFoodToOrder( Order& );
+    void addComboToOrder( Order& );
     void displayOrder( Order );
+    bool ifOrderActive( int );
+    int searchForActiveOrder( int );
+    void displayActiveOrders();
     void viewActiveOrders();
     void completeOrder();
+
+    ///Time Clock
+    void timeClockMenu();
+    void clockIn();
+    void clockOut();
 
     ///Menu and Foods
     void foodsMenu();
@@ -84,6 +92,8 @@ public:
 
     ///Functions for User Output
     void outputString( WINDOW*, int, int, std::string );
+    void outputPrice( WINDOW*, int, int, float );
+    void outputInt( WINDOW*, int, int, int );
 
 private:
     WINDOW* displayWindow;

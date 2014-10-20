@@ -22,6 +22,7 @@ public:
     void setBudget(float budget);// gets the budget.
     void setStateTaxRate(float stateTaxRate);// gets the state tax rate.
     void increaseBudget(float increaseInBudget);// added an amount to the current budget.
+    void decreaseBudget(float decreaseInBudget);// remove an amount from the current budget.
     Check createCheck(Employee employeeToPay);// makes a check for a specific employee.
     void deductCheckFromBudget(Check checkToRemove);// removes a check amount from the budget.
 

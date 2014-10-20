@@ -13,8 +13,8 @@ public:
     float getCost();
     float getPrice();
     int getComboSize();
+    std::vector<Food> getFoods();
     void setName(std::string);
-    void setCost(float);
     void setCost();
     void setPrice(float);
     void setComboSize(int);

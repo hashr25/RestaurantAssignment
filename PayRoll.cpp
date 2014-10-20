@@ -62,6 +62,18 @@ void PayRoll::increaseBudget(float increaseInBudget)
 
 }// void PayRoll::increaseBudget(float increaseInBudget)
 
+void PayRoll::decreaseBudget(float decreaseInBudget)
+{
+
+    budget = budget - decreaseInBudget;
+
+    if( budget < 0 )
+    {
+        budget = 0;
+    }
+
+}//void PayRoll:decreaseBudget(float decreaseInBudget)
+
 Check PayRoll::createCheck(Employee employeeToPay)
 {
     Check employeeCheck;

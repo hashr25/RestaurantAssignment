@@ -123,5 +123,35 @@ void Order::removeCombo(Combo comboToRemove)
     }
 }
 
+float Order::getSubTotalCost()
+{
+    float subTotal = 0.0;
 
+    if( foodsOrdered.size() > 0 )
+    {
+        for( int i = 0; i < foodsOrdered.size(); i++ )
+        {
+            subTotal = subTotal + foodsOrdered.at(i).getPrice();
+        }
+    }
 
+    if( combosOrdered.size() > 0 )
+    {
+        for( int i = 0; i < combosOrdered.size(); i++ )
+        {
+            subTotal = subTotal + combosOrdered.at(i).getPrice();
+        }
+    }
+
+    return subTotal;
+}
+
+float Order::getTaxes()
+{
+    return roundf( (getSubTotalCost() * 0.06) * 100) / 100;
+}
+
+float Order::getTotalCost()
+{
+    return getSubTotalCost() + getTaxes();
+}

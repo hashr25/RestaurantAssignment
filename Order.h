@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <math.h>
 #include "Food.h"
 #include "Combo.h"
 
@@ -28,6 +29,10 @@ public:
     int searchForCombo( Combo );
     void addCombo( Combo );
     void removeCombo( Combo );
+
+    float getSubTotalCost();
+    float getTaxes();
+    float getTotalCost();
 
 private:
     std::string customerName;

@@ -2,13 +2,13 @@
 #include <algorithm>
 
 Food::Food() :
-    name(""), size(0), price(0), cost(0)
+    name(""), foodSize(0), price(0), cost(0)
 {
 	///Variables set in init list.
 }
 
 Food::Food(std::string newName, int newSize, float newPrice, std::vector<Ingredient> newListOfIngredient) :
-    name(newName), size(newSize), price(newPrice), listOfIngredient(newListOfIngredient)
+    name(newName), foodSize(newSize), price(newPrice), listOfIngredient(newListOfIngredient)
 {
 	///Variables set in init list.
 	setCost();
@@ -20,9 +20,9 @@ std::string Food::getName()
 	return name;
 }
 
-int Food::getSize()
+int Food::getFoodSize()
 {
-	return size;
+	return foodSize;
 }
 
 float Food::getPrice()
@@ -45,15 +45,15 @@ void Food::setName(std::string name)
 	this->name = name;
 }
 
-void Food::setSize(int size)
+void Food::setFoodSize(int foodSize)
 {
-	if (size < 0)
+	if (foodSize < 0)
 	{
-		this->size = 0;
+		this-> foodSize = 0;
 	}
 	else
 	{
-		this->size = size;
+		this -> foodSize = foodSize;
 	}
 }
 

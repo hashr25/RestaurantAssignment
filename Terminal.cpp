@@ -1,5 +1,4 @@
 #include "Terminal.h"
-#include <curses.h>
 
 Terminal::Terminal():
     displayWindow(NULL), userInputWindow(NULL), sidePanelWindow(NULL)
@@ -207,11 +206,12 @@ void Terminal::mainMenu()
 
         mvwprintw( displayWindow, 5, 50, "Enter Your Selection:" );
         mvwprintw( displayWindow, 8, 45, "1 - Point Of Sale " );
-        mvwprintw( displayWindow, 9, 45, "2 - Inventory " );
-        mvwprintw( displayWindow, 10, 45, "3 - Menu and Foods " );
-        mvwprintw( displayWindow, 11, 45, "4 - Staffing ");
-        mvwprintw( displayWindow, 12, 45, "5 - Pay Roll " );
-        mvwprintw( displayWindow, 13, 45, "9 - Shut Down Terminal " );
+        mvwprintw( displayWindow, 9, 45, "2 - Time Clock " );
+        mvwprintw( displayWindow, 10, 45, "3 - Inventory " );
+        mvwprintw( displayWindow, 11, 45, "4 - Menu and Foods " );
+        mvwprintw( displayWindow, 12, 45, "5 - Staffing ");
+        mvwprintw( displayWindow, 13, 45, "6 - Pay Roll " );
+        mvwprintw( displayWindow, 14, 45, "9 - Shut Down Terminal " );
         wrefresh( displayWindow );
 
         bool goodInput = false;
@@ -221,7 +221,7 @@ void Terminal::mainMenu()
         while( !goodInput )
         {
             userInput = getUserIntInput();
-            if( ( userInput > 0 && userInput < 6 ) || userInput == 9 )
+            if( ( userInput > 0 && userInput < 7 ) || userInput == 9 )
             {
                 goodInput = true;
             }
@@ -235,20 +235,25 @@ void Terminal::mainMenu()
 
         else if( userInput == 2 )
         {
-            inventoryMenu();
+            timeClockMenu();
         }
 
         else if( userInput == 3 )
         {
-            foodsMenu();
+            inventoryMenu();
         }
 
         else if( userInput == 4 )
         {
-            staffingMenu();
+            foodsMenu();
         }
 
         else if( userInput == 5 )
+        {
+            staffingMenu();
+        }
+
+        else if( userInput == 6 )
         {
             payRollMenu();
         }
@@ -274,8 +279,8 @@ void Terminal::pointOfSaleMenu()
 
         mvwprintw( displayWindow, 5, 50, "Enter Your Selection:" );
         mvwprintw( displayWindow, 8, 45, "1 - View Menu ");
-        mvwprintw( displayWindow, 9, 45, "2 - Take Order (NOT IMPLIMENTED) " );
-        mvwprintw( displayWindow, 10, 45, "3 - View Active Orders (NOT IMPLIMENTED) ");
+        mvwprintw( displayWindow, 9, 45, "2 - Take Order " );
+        mvwprintw( displayWindow, 10, 45, "3 - View Active Orders ");
         mvwprintw( displayWindow, 11, 45, "4 - Complete Order (NOT IMPLIMENTED) " );
         mvwprintw( displayWindow, 12, 45, "9 - Return to Main Menu " );
         wrefresh( displayWindow );
@@ -396,78 +401,290 @@ void Terminal::takeOrder()
     Order newOrder;
 
     bool orderFinished = false;
-    bool goodInput = false;
 
     while( !orderFinished )
     {
-        while( !goodInput )
+        wclear( displayWindow );
+
+        displayOrder( newOrder );
+        mvwprintw( displayWindow, 4, 25, "Would you like to add a (F)ood or (C)ombo?");
+        mvwprintw( displayWindow, 5, 25, "Or press enter to submit order." );
+        wrefresh( displayWindow );
+
+        char foodOrCombo = getch();
+
+        if( foodOrCombo == 'F' || foodOrCombo == 'f' )
         {
-            mvwprintw( displayWindow, 4, 25, "Would you like to add a (F)ood or (C)ombo?");
-            mvwprintw( displayWindow, 5, 25, "Or press enter to submit order." );
-            wrefresh( displayWindow );
-            char foodOrCombo = getch();
+            addFoodToOrder( newOrder );
+        }
 
-            if( foodOrCombo == 'F' || foodOrCombo == 'f' )
-            {
-                goodInput = true;
-                addFoodToOrder( newOrder );
-            }
+        else if( foodOrCombo == 'C' || foodOrCombo == 'c' )
+        {
+            addComboToOrder( newOrder );
+        }
 
-            else if( foodOrCombo == 'C' || foodOrCombo == 'c' )
-            {
-                goodInput = true;
-                addComboToOrder( newOrder );
-            }
-
-            else if( foodOrCombo == '\n' )
-            {
-                goodInput = true;
-                orderFinished = true;
-            }
-
-            else
-            {
-                goodInput = false;
-            }
+        else if( foodOrCombo == '\n' )
+        {
+            orderFinished = true;
         }
     }
 
+    wclear( sidePanelWindow );
     activeOrders.push_back( newOrder );
 }
 
-void Terminal::addFoodToOrder( Order orderToAddTo )
+void Terminal::addFoodToOrder( Order& orderToAddTo )
 {
     wclear( displayWindow );
     makeWindowBorders();
 
+    std::string foodNameToAdd;
     Food foodToAdd;
     bool correctFood = false;
 
     while( !correctFood )
     {
-        mvwprintw( displayWindow, 20, 45, "Enter the number of the food you want to add: " );
+        wclear( displayWindow );
+        mvwprintw( displayWindow, 20, 45, "Enter the name of the food you want to add " );
+        displayFoods();
+        wrefresh( displayWindow );
+        foodNameToAdd = getUserStringInput();
 
+        foodToAdd.setName( foodNameToAdd );
+
+        wclear( displayWindow );
+        makeWindowBorders();
+
+        if( restaurantMenu.ifFoodExists( foodToAdd ) )
+        {
+            foodToAdd = restaurantMenu.getFoods().at( restaurantMenu.searchForFood( foodToAdd ) );
+            mvwprintw( displayWindow, 8, 45, "That food has been added to the order" );
+            correctFood = true;
+        }
+
+        else
+        {
+            mvwprintw( displayWindow, 8, 45, "That food is not on the menu" );
+        }
+
+        wrefresh( displayWindow );
+        getch();
     }
 
     orderToAddTo.addFood( foodToAdd );
 }
 
-void Terminal::addComboToOrder( Order orderToAddTo )
+void Terminal::addComboToOrder( Order& orderToAddTo )
 {
+    wclear( displayWindow );
+    makeWindowBorders();
 
+    std::string comboNameToAdd;
+    Combo comboToAdd;
+    bool correctCombo = false;
+
+    while( !correctCombo )
+    {
+        wclear( displayWindow );
+        mvwprintw( displayWindow, 20, 45, "Enter the name of the combo you want to add " );
+        displayCombos();
+        wrefresh( displayWindow );
+        comboNameToAdd = getUserStringInput();
+
+        comboToAdd.setName( comboNameToAdd );
+
+        wclear( displayWindow );
+        makeWindowBorders();
+
+        if( restaurantMenu.ifComboExists( comboToAdd ) )
+        {
+            comboToAdd = restaurantMenu.getCombos().at( restaurantMenu.searchForCombo( comboToAdd ) );
+            mvwprintw( displayWindow, 8, 45, "That combo has been added to the order" );
+            correctCombo = true;
+        }
+
+        else
+        {
+            mvwprintw( displayWindow, 8, 45, "That combo is not on the menu" );
+        }
+
+        wrefresh( displayWindow );
+        getch();
+    }
+
+    orderToAddTo.addCombo( comboToAdd );
 }
 
 void Terminal::displayOrder( Order orderToDisplay )
 {
+    wclear( sidePanelWindow );
+    makeWindowBorders();
 
+    int lineCounter = 0;
+
+    if( orderToDisplay.getCombos().size() > 0 )
+    {
+        for( int i = 0; i < orderToDisplay.getCombos().size(); i++ )
+        {
+            outputString( sidePanelWindow, 2 + lineCounter, 1, orderToDisplay.getCombos().at(i).getName() );
+            outputPrice( sidePanelWindow, 3 + lineCounter, 8, orderToDisplay.getCombos().at(i).getPrice() );
+            lineCounter = lineCounter + 2;
+        }
+    }
+
+    for( int i = 0; i < orderToDisplay.getFoods().size(); i++ )
+    {
+        outputString( sidePanelWindow, 2 + lineCounter, 1, orderToDisplay.getFoods().at(i).getName() );
+        outputPrice( sidePanelWindow, 3 + lineCounter, 8, orderToDisplay.getFoods().at(i).getPrice() );
+        lineCounter = lineCounter + 2;
+    }
+
+    mvwprintw( sidePanelWindow, 4 + lineCounter, 1, "SubTotal: " );
+    outputPrice( sidePanelWindow, 4 + lineCounter, 16, orderToDisplay.getSubTotalCost() );
+    mvwprintw( sidePanelWindow, 5 + lineCounter, 1, "Taxes: " );
+    outputPrice( sidePanelWindow, 5 + lineCounter, 16, orderToDisplay.getTaxes() );
+    mvwprintw( sidePanelWindow, 6 + lineCounter, 1, "Grand Total: " );
+    outputPrice( sidePanelWindow, 6 + lineCounter, 16, orderToDisplay.getTotalCost() );
+
+    wrefresh( sidePanelWindow );
+}
+
+bool Terminal::ifOrderActive( int orderNumberToFind )
+{
+    bool orderActive = false;
+
+    for( int i = 0; i < activeOrders.size(); i++ )
+    {
+        if( activeOrders.at(i).getOrderNumber() == orderNumberToFind )
+        {
+            orderActive = true;
+        }
+    }
+
+    return orderActive;
+}
+
+int Terminal::searchForActiveOrder( int orderNumberToFind )
+{
+    int orderIndex;
+
+    for( int i = 0; i < activeOrders.size(); i++ )
+    {
+        if( activeOrders.at(i).getOrderNumber() == orderNumberToFind )
+        {
+            orderIndex = i;
+        }
+    }
+
+    return orderIndex;
+}
+
+void Terminal::displayActiveOrders()
+{
+    wclear( displayWindow );
+    makeWindowBorders();
+
+    mvwprintw( displayWindow, 4, 51, "Current Active Orders " );
+    mvwprintw( displayWindow, 6, 45, "Order #        |      Order Total" );
+    mvwprintw( displayWindow, 7, 45, "---------------------------------" );
+
+    for( int i = 0; i < activeOrders.size(); i++ )
+    {
+        outputInt( displayWindow, 8+i, 45, activeOrders.at(i).getOrderNumber() );
+        outputPrice( displayWindow, 8+i, 73, activeOrders.at(i).getTotalCost() );
+    }
+
+    wrefresh( displayWindow );
 }
 
 void Terminal::viewActiveOrders()
 {
+    displayActiveOrders();
 
+    mvwprintw( displayWindow, 25, 35, "Enter the number of the order you would like to view" );
+    wrefresh( displayWindow );
+    int orderNumberToView = getUserLongIntInput();
+
+    if( ifOrderActive( orderNumberToView ) )
+    {
+        displayOrder( activeOrders.at( searchForActiveOrder( orderNumberToView) ) );
+    }
+
+    else
+    {
+        mvwprintw( displayWindow, 30, 45, "That Order is not active" );
+    }
+
+    wrefresh( displayWindow );
+    getch();
+    wclear( sidePanelWindow );
+    makeWindowBorders();
 }
 
 void Terminal::completeOrder()
+{
+    wclear( displayWindow );
+    makeWindowBorders();
+
+    //mvwprintw( displayWindow )
+}
+
+///Time Clock
+
+void Terminal::timeClockMenu()
+{
+    bool closeMenu = false;
+
+    while( !closeMenu )
+    {
+        wclear( displayWindow );
+        makeWindowBorders();
+
+        mvwprintw( displayWindow, 2, 55, "Foods and Combos Menu" );
+
+        mvwprintw( displayWindow, 5, 50, "Enter Your Selection:" );
+        mvwprintw( displayWindow, 8, 45, "1 - Clock In (NOT IMPLEMENTED) ");
+        mvwprintw( displayWindow, 9, 45, "2 - Clock Out (NOT IMPLEMENTED) " );
+        mvwprintw( displayWindow, 10, 45, "9 - Return to Main Menu " );
+        wrefresh( displayWindow );
+
+        bool goodInput = false;
+        int userInput;
+
+        //Get input for menu choice
+        while( !goodInput )
+        {
+            userInput = getUserIntInput();
+            if( ( userInput > 0 && userInput < 3 ) || userInput == 9 )
+            {
+                goodInput = true;
+            }
+        }
+
+        //Logic to select correct menu
+        if( userInput == 1 )
+        {
+            clockIn();
+        }
+
+        else if( userInput == 2 )
+        {
+            clockOut();
+        }
+
+        else if ( userInput == 9 )
+        {
+            closeMenu = true;
+        }
+    }//Close menu loop
+}
+
+void Terminal::clockIn()
+{
+
+}
+
+void Terminal::clockOut()
 {
 
 }
@@ -629,7 +846,7 @@ void Terminal::addFoodToMenu()
 
     foodToAdd.setName( foodName );
     foodToAdd.setPrice( foodPrice );
-    foodToAdd.setSize( foodSize );
+    foodToAdd.setFoodSize( foodSize );
     for( int i = 0; i < foodIngredients.size(); i++ )
     {
         foodToAdd.addIngredient( foodIngredients.at(i) );
@@ -1378,8 +1595,8 @@ void Terminal::payRollMenu()
 
         mvwprintw( displayWindow, 5, 50, "Enter Your Selection: " );
         mvwprintw( displayWindow, 8, 45, "1 - View Budget ");
-        mvwprintw( displayWindow, 9, 45, "2 - Increase Budget (NOT IMPLIMENTED) " );
-        mvwprintw( displayWindow, 10, 45, "3 - Decrease Budget (NOT IMPLIMENTED) " );
+        mvwprintw( displayWindow, 9, 45, "2 - Increase Budget " );
+        mvwprintw( displayWindow, 10, 45, "3 - Decrease Budget " );
         mvwprintw( displayWindow, 11, 45, "4 - Generate Employee Pay Check (NOT IMPLIMENTED) " );
         mvwprintw( displayWindow, 12, 45, "9 - Return to Main Menu " );
         wrefresh( displayWindow );
@@ -1391,7 +1608,7 @@ void Terminal::payRollMenu()
         while( !goodInput )
         {
             userInput = getUserIntInput();
-            if( ( userInput > 0 && userInput < 6 ) || userInput == 9 )
+            if( ( userInput > 0 && userInput < 5 ) || userInput == 9 )
             {
                 goodInput = true;
             }
@@ -1405,12 +1622,17 @@ void Terminal::payRollMenu()
 
         else if( userInput == 2 )
         {
-            createCheck();
+            increaseBudget();
         }
 
         else if( userInput == 3 )
         {
-            //Something else
+            decreaseBudget();
+        }
+
+        else if( userInput == 4 )
+        {
+            createCheck();
         }
 
         else if ( userInput == 9 )
@@ -1448,12 +1670,36 @@ void Terminal::viewBudget()
 
 void Terminal::increaseBudget()
 {
+    wclear( displayWindow );
+    makeWindowBorders();
 
+    mvwprintw( displayWindow, 8, 45, "How much is the budget increasing by? " );
+    mvwprintw( displayWindow, 9, 45, "Enter in $xxx.xx form(without $ )" );
+    wrefresh( displayWindow );
+
+    float increaseInBudget = getUserFloatInput();
+
+    mvwprintw( displayWindow, 15, 45, "The budget has been increased" );
+    wrefresh( displayWindow );
+    restaurantPayRoll.increaseBudget( increaseInBudget );
+    getch();
 }
 
 void Terminal::decreaseBudget()
 {
+    wclear( displayWindow );
+    makeWindowBorders();
 
+    mvwprintw( displayWindow, 8, 45, "How much is the budget decreasing by? " );
+    mvwprintw( displayWindow, 9, 45, "Enter in $xxx.xx form(without $ )" );
+    wrefresh( displayWindow );
+
+    float decreaseInBudget = getUserFloatInput();
+
+    mvwprintw( displayWindow, 15, 45, "The budget has been decreased" );
+    wrefresh( displayWindow );
+    restaurantPayRoll.decreaseBudget( decreaseInBudget );
+    getch();
 }
 
 void Terminal::createCheck()
@@ -1556,4 +1802,49 @@ void Terminal::outputString( WINDOW* window, int startY, int startX, std::string
     {
         mvwaddch( window, startY, startX+i, stringToOutput.at(i) );
     }
+}
+
+void Terminal::outputPrice( WINDOW* window, int startY, int startX, float priceToOutput )
+{
+    std::stringstream priceSS;
+    priceSS << priceToOutput;
+    std::string price = priceSS.str();
+
+    bool decimalExists = false;
+    int decimalIndex;
+    for( int i = 0; i < price.size(); i++ )
+    {
+        if( price.at(i) == '.' )
+        {
+            decimalExists = true;
+            decimalIndex = i;
+        }
+    }
+
+    if( priceToOutput == 0 )
+    {
+        price = "0.00";
+    }
+
+    else if( !decimalExists )
+    {
+        price = price + ".00";
+    }
+
+    else if( price.at( price.size() - 2 ) == '.' )
+    {
+        price = price + "0";
+    }
+
+    mvwaddch( window, startY, startX, '$' );
+    outputString( window, startY, startX+1, price );
+}
+
+void Terminal::outputInt( WINDOW* window, int startY, int startX, int intToOutput )
+{
+    std::stringstream intSS;
+    intSS << intToOutput;
+    std::string intString = intSS.str();
+
+    outputString( window, startY, startX, intString );
 }
