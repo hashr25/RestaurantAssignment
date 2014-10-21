@@ -15,7 +15,7 @@ class Inventory
 {
 
 public:
-    Inventory();// constructor
+    Inventory();//constructor
     ~Inventory();// destructor
     int searchForIngredient(Ingredient);// searches the vector to find if the specific ingredient is in the vector.
     void printInventory();// outputs the inventory.
@@ -28,7 +28,7 @@ public:
     std::vector<Ingredient> getInventory();
 
     //void loadInventory();
-    //void saveInventory();
+    void saveInventory();
 
 private:
     std::vector <Ingredient> ingredientsInStock;

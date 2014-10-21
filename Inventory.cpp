@@ -4,12 +4,12 @@
 
 Inventory::Inventory()
 {
-    //loadInventory();
-}// Inventory()::Inventory()
+    loadInventory();
+}//Inventory()::Inventory()
 
 Inventory::~Inventory()
 {
-    //saveInventory();
+    saveInventory();
 }// Inventory()::~Inventory()
 
 void Inventory::printInventory()
@@ -152,7 +152,7 @@ std::vector<Ingredient> Inventory::getInventory()
     return ingredientsInStock;
 }
 
-/*void Inventory::loadInventory()
+void Inventory::loadInventory()
 {
     std::ifstream inputFile;std::cout << "Trying to load inventory" << std::endl;
     inputFile.open( "Inventory.txt" );
@@ -167,14 +167,12 @@ std::vector<Ingredient> Inventory::getInventory()
     float loadCost;
     std::string loadUnit;
 
-    while( getline )
-    {
-        while( getline >> loadName >> loadQuantity >> loadCost >> loadUnit)
-        {std::cout << loadName << " " << loadQuantity << " " << loadCost << " " << loadUnit << std::endl;
-            Ingredient ingredientToAdd( loadName, loadQuantity, loadCost, loadUnit );
-            ingredientsInStock.push_back( ingredientToAdd );
-        }
+    while( inputFile >> loadName >> loadQuantity >> loadCost >> loadUnit )
+    {std::cout << loadName << " " << loadQuantity << " " << loadCost << " " << loadUnit << std::endl;
+        Ingredient ingredientToAdd( loadName, loadQuantity, loadCost, loadUnit );
+        ingredientsInStock.push_back( ingredientToAdd );
     }
+
 
     inputFile.close();
 }
@@ -193,4 +191,4 @@ void Inventory::saveInventory()
     }
 
     outputFile.close();
-}*/
+}
