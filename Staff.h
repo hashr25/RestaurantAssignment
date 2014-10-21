@@ -10,7 +10,9 @@ public:
     Staff();
 
     bool ifEmployed( Employee );
+    bool ifEmployed( int );
     int searchForEmployee( Employee );
+    int searchForEmployee( int );
     void fireEmployee( Employee );
     void hireEmployee( Employee );
     std::vector<Employee> getStaff();

@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 #include "Ingredient.h"
 
 class Inventory
@@ -25,6 +26,9 @@ public:
     void ingredientQuanitityAdjustment(Ingredient, int);// changes the amount of a specific ingredient.
     bool ifInStock(Ingredient);// checks to make sure ingredient is in the inventory.
     std::vector<Ingredient> getInventory();
+
+    //void loadInventory();
+    //void saveInventory();
 
 private:
     std::vector <Ingredient> ingredientsInStock;

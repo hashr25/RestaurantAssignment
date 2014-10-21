@@ -4,9 +4,13 @@
 
 Inventory::Inventory()
 {
-
+    //loadInventory();
 }// Inventory()::Inventory()
 
+Inventory::~Inventory()
+{
+    //saveInventory();
+}// Inventory()::~Inventory()
 
 void Inventory::printInventory()
 {
@@ -142,12 +146,51 @@ bool Inventory::ifInStock(Ingredient ingredientToFind)
 
 }// bool Inventory::ifInStock(Ingredient ingredientToFind)
 
-Inventory::~Inventory()
-{
-
-}// Inventory()::~Inventory()
 
 std::vector<Ingredient> Inventory::getInventory()
 {
     return ingredientsInStock;
 }
+
+/*void Inventory::loadInventory()
+{
+    std::ifstream inputFile;std::cout << "Trying to load inventory" << std::endl;
+    inputFile.open( "Inventory.txt" );
+
+    if( inputFile.fail() )
+    {
+        std::cout << "Could not load inventory" << std::endl;
+    }
+
+    std::string loadName;
+    int loadQuantity;
+    float loadCost;
+    std::string loadUnit;
+
+    while( getline )
+    {
+        while( getline >> loadName >> loadQuantity >> loadCost >> loadUnit)
+        {std::cout << loadName << " " << loadQuantity << " " << loadCost << " " << loadUnit << std::endl;
+            Ingredient ingredientToAdd( loadName, loadQuantity, loadCost, loadUnit );
+            ingredientsInStock.push_back( ingredientToAdd );
+        }
+    }
+
+    inputFile.close();
+}
+
+void Inventory::saveInventory()
+{
+    std::ofstream outputFile;
+    outputFile.open( "Inventory.txt" );
+
+    for( int i = 0; i < ingredientsInStock.size(); i++ )
+    {
+        outputFile << ingredientsInStock.at(i).getName() << ", ";
+        outputFile << ingredientsInStock.at(i).getQuantity() << ", ";
+        outputFile << ingredientsInStock.at(i).getCostPerUnit() << ", ";
+        outputFile << ingredientsInStock.at(i).getUnitOfMeasurement() << "\n";
+    }
+
+    outputFile.close();
+}*/

@@ -57,6 +57,11 @@ Schedule Employee::getEmployeeSchedule()
     return employeeSchedule;
 }
 
+Check Employee::getLastCheck()
+{
+    return lastCheck;
+}
+
 
 void Employee::setName( std::string name )
 {
@@ -97,6 +102,11 @@ void Employee::setEmployeeSchedule( Schedule newSchedule )
     employeeSchedule = newSchedule;
 }
 
+void Employee::setLastCheck( Check lastCheck )
+{
+    this -> lastCheck = lastCheck;
+}
+
 ///Methods
 void Employee::payRaise()
 {
@@ -118,13 +128,76 @@ void Employee::promote( int positionsToPromote)
     setPosition( position + positionsToPromote );
 }
 
-Employee Employee::operator = ( const Employee& newEmployee )
+void Employee::clockIn()
 {
-    name = newEmployee.name;
-    setIDCustom( newEmployee.employeeID );
-    setPosition( newEmployee.position );
-    positionTitle = newEmployee.positionTitle;
-    setHourlyPayRate( newEmployee.hourlyPayRate );
-    employeeSchedule = newEmployee.employeeSchedule;
+    MyTime currentTime;
+    currentTime = currentTime.getCurrentTime();
+
+    MyDate currentDate;
+    currentDate = currentDate.getCurrentDate();
+
+    WorkDay* workDayToChange;
+
+    for( int i = 0; i < 7; i++ )
+    {
+        if( employeeSchedule.getWorkWeekOne().at(i).getDate().getMonth() == currentDate.getMonth() &&
+            employeeSchedule.getWorkWeekOne().at(i).getDate().getDay() == currentDate.getDay()     &&
+            employeeSchedule.getWorkWeekOne().at(i).getDate().getYear() == currentDate.getYear()    )
+        {
+            workDayToChange = &employeeSchedule.getWorkWeekOne().at(i);
+        }
+
+        if( employeeSchedule.getWorkWeekTwo().at(i).getDate().getMonth() == currentDate.getMonth() &&
+            employeeSchedule.getWorkWeekTwo().at(i).getDate().getDay() == currentDate.getDay()     &&
+            employeeSchedule.getWorkWeekTwo().at(i).getDate().getYear() == currentDate.getYear()    )
+        {
+            workDayToChange = &employeeSchedule.getWorkWeekTwo().at(i);
+        }
+    }
+
+    workDayToChange -> setClockInTime( currentTime );
+    workDayToChange = NULL;
 }
+
+void Employee::clockOut()
+{
+    MyTime currentTime;
+    currentTime = currentTime.getCurrentTime();
+
+    MyDate currentDate;
+    currentDate = currentDate.getCurrentDate();
+
+    WorkDay* workDayToChange;
+
+    for( int i = 0; i < 7; i++ )
+    {
+        if( employeeSchedule.getWorkWeekOne().at(i).getDate().getMonth() == currentDate.getMonth() &&
+            employeeSchedule.getWorkWeekOne().at(i).getDate().getDay() == currentDate.getDay()     &&
+            employeeSchedule.getWorkWeekOne().at(i).getDate().getYear() == currentDate.getYear()    )
+        {
+            workDayToChange = &employeeSchedule.getWorkWeekOne().at(i);
+        }
+
+        if( employeeSchedule.getWorkWeekTwo().at(i).getDate().getMonth() == currentDate.getMonth() &&
+            employeeSchedule.getWorkWeekTwo().at(i).getDate().getDay() == currentDate.getDay()     &&
+            employeeSchedule.getWorkWeekTwo().at(i).getDate().getYear() == currentDate.getYear()    )
+        {
+            workDayToChange = &employeeSchedule.getWorkWeekTwo().at(i);
+        }
+    }
+
+    workDayToChange -> setClockOutTime( currentTime );
+    workDayToChange = NULL;
+}
+
+///This is not working properly
+/*Employee Employee::operator = ( const Employee& newEmployee )
+{
+    name = newEmployee.name;std::cout << "copied employee name" << std::endl;
+    setIDCustom( newEmployee.employeeID );std::cout << "copied employee id" << std::endl;
+    setPosition( newEmployee.position );std::cout << "copied employee position" << std::endl;
+    positionTitle = newEmployee.positionTitle;std::cout << "copied employee position title" << std::endl;
+    setHourlyPayRate( newEmployee.hourlyPayRate );std::cout << "copied employee pay rate" << std::endl;
+    employeeSchedule = newEmployee.employeeSchedule;std::cout << "copied employee schedule" << std::endl;
+}*/
 

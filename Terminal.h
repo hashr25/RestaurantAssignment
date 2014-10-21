@@ -31,6 +31,7 @@ public:
     void createTestStuff();
 
     ///Main Menu
+    void titleScreen();
     void mainMenu();
 
     ///Point of Sale
@@ -41,6 +42,8 @@ public:
     void takeOrder();
     void addFoodToOrder( Order& );
     void addComboToOrder( Order& );
+    void removeFoodFromOrder( Order& );
+    void removeComboFromOrder( Order& );
     void displayOrder( Order );
     bool ifOrderActive( int );
     int searchForActiveOrder( int );
@@ -72,6 +75,7 @@ public:
     ///Staffing
     void staffingMenu();
     void displayStaff();
+    void showStaff();
     void fireEmployee();
     void hireEmployee();
     void viewEmployeeSchedule();
@@ -83,12 +87,14 @@ public:
     void increaseBudget();
     void decreaseBudget();
     void createCheck();
+    void displayCheck( Check );
 
     ///Functions for User Input
     int getUserIntInput();
     int getUserLongIntInput();
     float getUserFloatInput();
     std::string getUserStringInput();
+    bool verifyManager();
 
     ///Functions for User Output
     void outputString( WINDOW*, int, int, std::string );

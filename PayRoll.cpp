@@ -1,9 +1,8 @@
 #include "payRoll.h"
 
-PayRoll::PayRoll():
-    stateTaxRate(0.06) //for testing purposes
+PayRoll::PayRoll()
 {
-
+    loadPayRoll();
 }// PayRoll::PayRoll()
 
 float PayRoll::getBudget()
@@ -105,5 +104,33 @@ void PayRoll::deductCheckFromBudget(Check checkToRemove)
 
 PayRoll::~PayRoll()
 {
-
+    savePayRoll();
 }// PayRoll::~PayRoll()
+
+void PayRoll::savePayRoll()
+{
+    std::ofstream outputFile;
+
+    outputFile.open( "PayRoll.txt" );
+    outputFile << budget << "\n";
+    outputFile << stateTaxRate;
+
+    outputFile.close();
+}
+
+void PayRoll::loadPayRoll()
+{
+    std::ifstream inputFile;
+
+    float loadBudget;
+    float loadStateTax;
+
+    inputFile.open( "PayRoll.txt" );
+    while( inputFile >> loadBudget >> loadStateTax )
+    {
+        budget = loadBudget;
+        stateTaxRate = loadStateTax;
+    }
+
+    inputFile.close();
+}

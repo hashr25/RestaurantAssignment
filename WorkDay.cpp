@@ -211,6 +211,11 @@ float WorkDay::calculateHoursWorked()
     return hoursWorkedCalculation;
 }
 
+void WorkDay::nextDay()
+{
+    date.nextDay();
+}
+
 WorkDay WorkDay::operator = ( const WorkDay& newWorkDay )
 {
     date = newWorkDay.date;

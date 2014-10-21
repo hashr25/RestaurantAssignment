@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <fstream>
+
 #include "check.h"
 #include "Employee.h"
 
@@ -25,6 +27,9 @@ public:
     void decreaseBudget(float decreaseInBudget);// remove an amount from the current budget.
     Check createCheck(Employee employeeToPay);// makes a check for a specific employee.
     void deductCheckFromBudget(Check checkToRemove);// removes a check amount from the budget.
+
+    void loadPayRoll();
+    void savePayRoll();
 
 private:
     float budget;

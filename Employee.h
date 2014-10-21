@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Schedule.h"
+#include "Check.h"
 
 
 class Employee
@@ -21,6 +22,7 @@ public:
     std::string getPositionTitle();
     float getHourlyPayRate();
     Schedule getEmployeeSchedule();
+    Check getLastCheck();
 
     void setName( std::string );
     void setID();
@@ -29,6 +31,7 @@ public:
     void setPositionTitle( std::string );
     void setHourlyPayRate( float );
     void setEmployeeSchedule( Schedule );
+    void setLastCheck( Check );
 
     ///Methods
     void payRaise();
@@ -36,7 +39,10 @@ public:
     void promote();
     void promote( int );
 
-    Employee operator = ( const Employee& );
+    void clockIn();
+    void clockOut();
+
+    //Employee operator = ( const Employee& );
 
 private:
     std::string name;
@@ -46,6 +52,7 @@ private:
     float hourlyPayRate;
     Schedule employeeSchedule;
     static int employeeIDGenerator;
+    Check lastCheck;
 };
 
 #endif // EMPLOYEE_H

@@ -22,6 +22,21 @@ bool Staff::ifEmployed( Employee employeeToFind )
     return employeeEmployed;
 }
 
+bool Staff::ifEmployed( int employeeIDToFind )
+{
+    bool employeeEmployed = false;
+
+    for( int i = 0; i < listOfEmployees.size(); i++ )
+    {
+        if( listOfEmployees.at(i).getID() == employeeIDToFind )
+        {
+            employeeEmployed = true;
+        }
+    }
+
+    return employeeEmployed;
+}
+
 int Staff::searchForEmployee( Employee employeeToSearch ) //Returns the index of the employee in the vector
 {
     int employeeIndex;
@@ -29,6 +44,21 @@ int Staff::searchForEmployee( Employee employeeToSearch ) //Returns the index of
     for( int i = 0; i < listOfEmployees.size(); i++ )
     {
         if( listOfEmployees.at(i).getName() == employeeToSearch.getName() )
+        {
+            employeeIndex = i;
+        }
+    }
+
+    return employeeIndex;
+}
+
+int Staff::searchForEmployee( int employeeIDToSearch )
+{
+    int employeeIndex;
+
+    for( int i = 0; i < listOfEmployees.size(); i++ )
+    {
+        if( listOfEmployees.at(i).getID() == employeeIDToSearch )
         {
             employeeIndex = i;
         }

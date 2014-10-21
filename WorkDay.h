@@ -30,11 +30,13 @@ public:
     void setClockInTime( MyTime );
     void setClockOutTime( MyTime );
 
+
     ///Member Methods
     void clockIn();
     void clockOut();
     float calculateHoursScheduled();
     float calculateHoursWorked();
+    void nextDay();
 
     WorkDay operator = ( const WorkDay& );
 
