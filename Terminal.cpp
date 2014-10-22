@@ -6,8 +6,15 @@ Terminal::Terminal():
     setupCurses();
     makeWindowBorders();
     createTestStuff();
-    titleScreen();
+
+    ///Used the terminal constructor to call loading functions to control the order they are called
+        ///The menu loading requires the inventory to have loaded first
     //restaurantInventory.loadInventory();
+    //restaurantMenu.loadMenu( restaurantInventory );
+    restaurantPayRoll.loadPayRoll();
+    //restaurantStaff.loadStaff();
+
+    titleScreen();
 }
 
 Terminal::~Terminal()
@@ -210,9 +217,6 @@ void Terminal::createTestStuff()
     restaurantStaff.hireEmployee( employee4 );
     restaurantStaff.hireEmployee( employee5 );
     restaurantStaff.hireEmployee( employee6 );
-
-    ///Pay Roll
-    //restaurantPayRoll.setBudget(100000.0);
 }
 
 ///Main Menu
@@ -220,15 +224,15 @@ void Terminal::titleScreen()
 {
     //The formating of this ascii art has been altered in code to compensate for "\" being a viewable character in c++
     mvwprintw( displayWindow, 2,  10, " ______     ______     ______     ______   ______     __  __     ______     ______     __   __     ______  " );
-    mvwprintw( displayWindow, 3,  10, "/\\  == \\   /\\  ___\\   /\\  ___\\   /\\__  _\\ /\\  __ \\   /\\ \\/\\ \\   /\\  == \\   /\\  __ \\   /\\ '-.\\ \\   /\\__  _\\ " );
+    mvwprintw( displayWindow, 3,  10, "/\\  == \\   /\\  ___\\   /\\  ___\\   /\\__  _\\ /\\  __ \\   /\\ \\/\\ \\   /\\  == \\   /\\  __ \\   /\\ \"-.\\ \\   /\\__  _\\ " );
     mvwprintw( displayWindow, 4,  10, "\\ \\  __<   \\ \\  __\\   \\ \\___  \\  \\/_/\\ \\/ \\ \\  __ \\  \\ \\ \\_\\ \\  \\ \\  __<   \\ \\  __ \\  \\ \\ \\-.  \\  \\/_/\\ \\/ " );
-    mvwprintw( displayWindow, 5,  10, " \\ \\_\\ \\_\\  \\ \\_____\\  \\/\\_____\\    \\ \\_\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\\\'\\_\\    \\ \\_\\ " );
+    mvwprintw( displayWindow, 5,  10, " \\ \\_\\ \\_\\  \\ \\_____\\  \\/\\_____\\    \\ \\_\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\\\\"\\_\\    \\ \\_\\ " );
     mvwprintw( displayWindow, 6,  10, "  \\/_/ /_/   \\/_____/   \\/_____/     \\/_/   \\/_/\\/_/   \\/_____/   \\/_/ /_/   \\/_/\\/_/   \\/_/ \\/_/     \\/_/ " );
     mvwprintw( displayWindow, 7,  10, "                                                                                                           " );
     mvwprintw( displayWindow, 8,  10, "             ______   ______     ______     __    __     __     __   __     ______     __                  " );
-    mvwprintw( displayWindow, 9,  10, "            /\\__  _\\ /\\  ___\\   /\\  == \\   /\\ '-./  \\   /\\ \\   /\\ '-.\\ \\   /\\  __ \\   /\\ \\                 " );
+    mvwprintw( displayWindow, 9,  10, "            /\\__  _\\ /\\  ___\\   /\\  == \\   /\\ \"-./  \\   /\\ \\   /\\ \"-.\\ \\   /\\  __ \\   /\\ \\                 " );
     mvwprintw( displayWindow, 10, 10, "            \\/_/\\ \\/ \\ \\  __\\   \\ \\  __<   \\ \\ \\-./\\ \\  \\ \\ \\  \\ \\ \\-.  \\  \\ \\  __ \\  \\ \\ \\____            " );
-    mvwprintw( displayWindow, 11, 10, "               \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_\\  \\ \\_\\\\'\\_\\  \\ \\_\\ \\_\\  \\ \\_____\\           " );
+    mvwprintw( displayWindow, 11, 10, "               \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_\\  \\ \\_\\\\\"\\_\\  \\ \\_\\ \\_\\  \\ \\_____\\           " );
     mvwprintw( displayWindow, 12, 10, "                \\/_/   \\/_____/   \\/_/ /_/   \\/_/  \\/_/   \\/_/   \\/_/ \\/_/   \\/_/\\/_/   \\/_____/           " );
     mvwprintw( displayWindow, 13, 10, "                                                                                                           " );
 
@@ -2004,14 +2008,12 @@ std::string Terminal::getUserStringInput()//Modified function from Randy Hash's 
 {
     std::string userInput;
 
-    echo();
     bool goodInput = false;
 
     while( !goodInput )
     {
         wclear( userInputWindow );
         makeWindowBorders();
-        wmove( userInputWindow, 8, 55 );
 
         int letterCounter = 0;
         char ch;
@@ -2025,8 +2027,16 @@ std::string Terminal::getUserStringInput()//Modified function from Randy Hash's 
                 break;
             }
 
+            if( ch == '\b' )
+            {
+                mvwaddch( userInputWindow, 8, 55+letterCounter-1, ' ' );
+                letterCounter = letterCounter - 2;
+                userInput.erase( userInput.begin() + userInput.size() - 1 );
+            }
+
             else
             {
+                mvwaddch( userInputWindow, 8, 55+letterCounter, ch );
                 userInput.push_back(ch);
             }
 
@@ -2042,10 +2052,12 @@ std::string Terminal::getUserStringInput()//Modified function from Randy Hash's 
             goodInput = true;
         }
 
+        else
+        {
+            userInput = "";
+        }
+
     }//End of good input while loop
-
-
-    noecho();
 
     wclear( userInputWindow );
     makeWindowBorders();

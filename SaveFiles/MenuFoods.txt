@@ -1,0 +1,7 @@
+Hamburger, 0, 1.1, Hamburger, Hamburger Buns
+Cheeseburger, 0, 1.4, Hamburger, Hamburger Buns, Cheese
+Bacon Burger, 0, 1.6, Hamburger, Hamburger Buns, Bacon, Bacon
+Bacon Cheeseburger, 0, 1.8, Hamburger, Hamburger Buns, Cheese
+French Fries, 0, 1, French Fries
+Tater Tots, 0, 1.1, Tater Tots
+Large Coke, 0, 1, Coke

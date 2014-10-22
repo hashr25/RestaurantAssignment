@@ -1,0 +1,7 @@
+Hamburger, 51, 0.75, patties
+Hamburger Bun, 51, 0.23, buns
+Cheese, 51, 0.1, slices
+French Fries, 51, 0.6, servings
+Tater Tots, 51, 0.5, servings
+Bacon, 51, 0.6, slivers
+Coke, 51, 0.25, servings

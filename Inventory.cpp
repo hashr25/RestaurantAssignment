@@ -4,12 +4,12 @@
 
 Inventory::Inventory()
 {
-    loadInventory();
+    //loadInventory();
 }//Inventory()::Inventory()
 
 Inventory::~Inventory()
 {
-    saveInventory();
+    //saveInventory();
 }// Inventory()::~Inventory()
 
 void Inventory::printInventory()
@@ -155,7 +155,7 @@ std::vector<Ingredient> Inventory::getInventory()
 void Inventory::loadInventory()
 {
     std::ifstream inputFile;std::cout << "Trying to load inventory" << std::endl;
-    inputFile.open( "Inventory.txt" );
+    inputFile.open( "SaveFiles/Inventory.txt" );
 
     if( inputFile.fail() )
     {
@@ -163,16 +163,42 @@ void Inventory::loadInventory()
     }
 
     std::string loadName;
+    std::string loadQuantityString;
     int loadQuantity;
+    std::string loadCostString;
     float loadCost;
     std::string loadUnit;
+    std::string line;
+    std::stringstream lineSS ( std::stringstream::in | std::stringstream::out );
 
-    while( inputFile >> loadName >> loadQuantity >> loadCost >> loadUnit )
-    {std::cout << loadName << " " << loadQuantity << " " << loadCost << " " << loadUnit << std::endl;
+    int beginningOfSubString = 0;
+
+    while( getline( inputFile, line ) )
+    {
+        std::vector< int > commaLocations;
+
+        for( int i = 0; i < line.size(); i++ )
+        {
+            if( line.at(i) == ',' )
+            {
+                commaLocations.push_back(i);
+            }
+        }
+
+        loadName = line.substr( 0, commaLocations.at(0) );
+        loadQuantityString = line.substr( commaLocations.at(0)+1, ( commaLocations.at(1) - commaLocations.at(0) ) );
+        loadCostString = line.substr( commaLocations.at(1)+1, ( commaLocations.at(2) - commaLocations.at(1) ) );
+        loadUnit = line.substr( commaLocations.at(2)+1, ( line.size() - commaLocations.at(2) ) );
+
+        std::istringstream quantitySS(loadQuantityString);
+        quantitySS >> loadQuantity;
+
+        std::istringstream costSS(loadCostString);
+        costSS >> loadCost;
+
         Ingredient ingredientToAdd( loadName, loadQuantity, loadCost, loadUnit );
         ingredientsInStock.push_back( ingredientToAdd );
     }
-
 
     inputFile.close();
 }
@@ -180,7 +206,7 @@ void Inventory::loadInventory()
 void Inventory::saveInventory()
 {
     std::ofstream outputFile;
-    outputFile.open( "Inventory.txt" );
+    outputFile.open( "SaveFiles/Inventory.txt" );
 
     for( int i = 0; i < ingredientsInStock.size(); i++ )
     {

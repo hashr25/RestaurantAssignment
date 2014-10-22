@@ -111,7 +111,7 @@ void PayRoll::savePayRoll()
 {
     std::ofstream outputFile;
 
-    outputFile.open( "PayRoll.txt" );
+    outputFile.open( "SaveFiles/PayRoll.txt" );
     outputFile << budget << "\n";
     outputFile << stateTaxRate;
 
@@ -125,7 +125,7 @@ void PayRoll::loadPayRoll()
     float loadBudget;
     float loadStateTax;
 
-    inputFile.open( "PayRoll.txt" );
+    inputFile.open( "SaveFiles/PayRoll.txt" );
     while( inputFile >> loadBudget >> loadStateTax )
     {
         budget = loadBudget;

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <vector>
 
 #include "Ingredient.h"
@@ -27,7 +28,7 @@ public:
     bool ifInStock(Ingredient);// checks to make sure ingredient is in the inventory.
     std::vector<Ingredient> getInventory();
 
-    //void loadInventory();
+    void loadInventory();
     void saveInventory();
 
 private:

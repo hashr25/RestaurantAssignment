@@ -7,7 +7,7 @@
 	<string>
 	<vector>
 
-1413739836 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\combo.cpp
+1413941941 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\combo.cpp
 	"Combo.h"
 
 1413739812 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\combo.h
@@ -22,10 +22,10 @@
 	<string>
 	<iostream>
 
-1413837474 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\employee.cpp
+1413948303 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\employee.cpp
 	"Employee.h"
 
-1413835668 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\employee.h
+1413947639 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\employee.h
 	<string>
 	"Schedule.h"
 	"Check.h"
@@ -34,7 +34,7 @@
 	<vector>
 	"WorkDay.h"
 
-1413822255 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\workday.h
+1413952920 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\workday.h
 	"MyDate.h"
 	"MyTime.h"
 
@@ -56,22 +56,25 @@
 1412273653 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\ingredient.cpp
 	"Ingredient.h"
 
-1413900758 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\inventory.cpp
+1413941991 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\inventory.cpp
 	"Inventory.h"
 
-1413901701 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\inventory.h
+1413907813 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\inventory.h
 	<math.h>
 	<iostream>
 	<fstream>
 	<string>
+	<sstream>
 	<vector>
 	"Ingredient.h"
 
-1413570746 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\menu.cpp
+1413982456 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\menu.cpp
 	"Menu.h"
 
-1413570737 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\menu.h
+1413944413 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\menu.h
 	<vector>
+	<fstream>
+	"Inventory.h"
 	"Food.h"
 	"Combo.h"
 
@@ -91,7 +94,7 @@
 	"Food.h"
 	"Combo.h"
 
-1413897779 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\payroll.cpp
+1413922639 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\payroll.cpp
 	"payRoll.h"
 
 1413896750 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\payroll.h
@@ -113,14 +116,15 @@
 1413663780 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\schedule.cpp
 	"Schedule.h"
 
-1413832629 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\staff.cpp
+1413953089 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\staff.cpp
 	"Staff.h"
 
-1413831892 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\staff.h
+1413952082 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\staff.h
 	<vector>
+	<fstream>
 	"Employee.h"
 
-1413900791 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\terminal.cpp
+1413953104 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\terminal.cpp
 	"Terminal.h"
 
 1413838134 c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\terminal.h
@@ -152,6 +156,6 @@
 	"PayRoll.h"
 	"Terminal.h"
 
-1413822282 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\workday.cpp
+1413953153 source:c:\users\hashr_000\onedrive\concord university\fall 2014\cs240\assignments\group assignment 1\github project\restaurantassignment\workday.cpp
 	"WorkDay.h"
 

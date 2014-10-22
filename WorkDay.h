@@ -9,8 +9,7 @@ class WorkDay
 public:
     ///Constructors and Destructors
     WorkDay();
-    WorkDay( MyTime, MyTime );
-    WorkDay( MyTime, MyTime, MyTime, MyTime );
+    WorkDay( MyDate, MyTime, MyTime, MyTime, MyTime );
     ~WorkDay();
 
     ///Getters and Setters

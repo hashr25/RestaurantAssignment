@@ -1,0 +1,8 @@
+Hamburger with Fries, 4.1, Hamburger, French Fries, Large Coke
+Hamburger with Tots, 4.2, Hamburger, Tater Tots, Large Coke
+Cheeseburger with Fries, 4.3, Cheeseburger, French Fries, Large Coke
+Cheeseburger with Tots, 4.4, Cheeseburger, Tater Tots, Large Coke
+Bacon Burger with Fries, 4.5, Bacon Burger, French Fries, Large Coke
+Bacon Burger with Tots, 4.6, Bacon Burger, Tater Tots, Large Coke
+Bacon Cheeseburger with Fries, 4.7, Bacon Cheeseburger, French Fries, Large Coke
+Bacon Cheeseburger with Tots, 4.8, Bacon Cheeseburger, Tater Tots, Large Coke

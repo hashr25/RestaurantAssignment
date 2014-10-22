@@ -54,6 +54,8 @@
 		<Unit filename="Order.h" />
 		<Unit filename="PayRoll.cpp" />
 		<Unit filename="PayRoll.h" />
+		<Unit filename="Restaurant.cpp" />
+		<Unit filename="Restaurant.h" />
 		<Unit filename="Schedule.cpp" />
 		<Unit filename="Schedule.h" />
 		<Unit filename="Staff.cpp" />

@@ -6,6 +6,12 @@ WorkDay::WorkDay()
 
 }
 
+WorkDay::WorkDay( MyDate newDate, MyTime scheduleIn, MyTime scheduleOut, MyTime clockIn, MyTime clockOut ):
+    date(newDate), scheduleStartTime(scheduleIn), scheduleEndTime(scheduleOut), clockInTime(clockIn), clockOutTime(clockOut)
+{
+
+}
+
 WorkDay::~WorkDay()
 {
     ///Nothing to do as of right now

@@ -13,6 +13,7 @@ public:
     Employee();
     Employee( std::string, int, std::string, float );
     Employee( std::string, int, std::string, float, Schedule );
+    Employee( std::string, int, int, std::string, float, Schedule );
     ~Employee();
 
     ///Getters and Setters

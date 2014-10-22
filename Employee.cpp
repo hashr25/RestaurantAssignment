@@ -21,6 +21,13 @@ Employee::Employee( std::string newName , int newPosition, std::string newPositi
     setID();
 }
 
+Employee::Employee( std::string newName , int newID, int newPosition, std::string newPositionTitle, float newPayRate, Schedule newSchedule ):
+    name(newName), employeeID(newID), position(newPosition), positionTitle(newPositionTitle),
+    hourlyPayRate(newPayRate), employeeSchedule(newSchedule)
+{
+
+}
+
 Employee::~Employee()
 {
 

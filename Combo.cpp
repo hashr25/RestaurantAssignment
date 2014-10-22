@@ -28,6 +28,11 @@ float Combo::getCost()
     return cost;
 }
 
+int Combo::getComboSize()
+{
+    return comboSize;
+}
+
 std::vector<Food> Combo::getFoods()
 {
     return listOfFoods;
